@@ -1,4 +1,4 @@
-package com.cybertek.day4;
+package com.ozerk.day4;
 
 import com.cybertek.utilities.HRTestBase;
 import io.restassured.http.ContentType;
@@ -8,8 +8,9 @@ import org.junit.jupiter.api.Test;
 
 import java.util.List;
 
-import static io.restassured.RestAssured.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class ORDSApiTestWithPath extends HRTestBase {
 
@@ -78,12 +79,6 @@ public class ORDSApiTestWithPath extends HRTestBase {
 
         //HW
         //print name of each IT_PROGs
-
-        List<String> allIT_ProgsNames = response.path("items.first_name");
-
-        for (String IT_ProgName : allIT_ProgsNames) {
-            System.out.println("IT_ProgName = " + IT_ProgName);
-        }
 
     }
 

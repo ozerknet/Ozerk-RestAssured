@@ -1,4 +1,4 @@
-package com.cybertek.day3;
+package com.ozerk.day3;
 
 
 import io.restassured.http.ContentType;
@@ -7,8 +7,10 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static io.restassured.RestAssured.baseURI;
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ORDSApiTestsWithParameters {
 
     @BeforeAll

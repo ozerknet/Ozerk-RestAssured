@@ -1,27 +1,23 @@
-package com.cybertek.day2;
+package com.ozerk.day2;
 
-import com.cybertek.utilities.ConfigurationReader;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.*;
-import static org.junit.jupiter.api.Assertions.*;
+import static io.restassured.RestAssured.get;
+import static io.restassured.RestAssured.given;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class HrGetRequests {
 
-    //-------------------------------------------------------------------------------------------
-    //BeforeAll is a annotation equals to @BeforeClass in testNg, we use with static method name
     @BeforeAll
     public static void init(){
-        //save baseurl inside this variable so that we dont need to type each http method.
-        baseURI = ConfigurationReader.getProperty("ordsBaseUrl");
+        RestAssured.baseURI = "http://100.24.45.97:1000/ods/hr";
     }
-    //-------------------------------------------------------------------------------------------
 
     @DisplayName("GET request to /regions")
     @Test
@@ -46,8 +42,8 @@ public class HrGetRequests {
     @Test
     public void test2(){
         Response response = given().accept(ContentType.JSON)
-                            .when()
-                                    .get("/regions/2");
+                .when()
+                .get("/regions/2");
 
         //verify status code
         assertEquals(200,response.statusCode());
@@ -60,30 +56,4 @@ public class HrGetRequests {
         assertTrue(response.body().asString().contains("Americas"));
 
     }
-
-    @DisplayName("GET request to /regions/4")
-    @Test
-    public void test3(){
-        Response response = given().accept(ContentType.JSON)
-                .when()
-                .get("/regions/4");
-
-
-
-        response.prettyPrint();
-
-        System.out.println(response.headers().toString());
-
-        assertEquals(200,response.statusCode());
-
-        assertEquals("application/json",response.contentType());
-
-
-
-    }
-
-
-
-
-
 }

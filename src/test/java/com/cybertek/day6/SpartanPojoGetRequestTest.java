@@ -22,7 +22,9 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
 
         Response response = given().accept(ContentType.JSON)
                 .and().pathParam("id", 15)
+
                 .when().get("/api/spartans/{id}")
+
                 .then().statusCode(200)
                 .log().all()
                 .extract().response();
@@ -57,7 +59,9 @@ public class SpartanPojoGetRequestTest extends SpartanTestBase {
         JsonPath jsonPath = given().accept(ContentType.JSON)
                            .and().queryParams("nameContains", "a",
                         "gender", "Male")
+
                             .when().get("/api/spartans/search")
+
                             .then().statusCode(200)
                             .extract().jsonPath();
 

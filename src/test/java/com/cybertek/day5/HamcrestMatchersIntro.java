@@ -36,6 +36,20 @@ public class HamcrestMatchersIntro {
         //lessThan()
         //lessThanOrEqualTo()
         assertThat(5+5,is(greaterThan(9)));
+
+
+    }
+
+    @Test
+    public void describedAsMatcherTest() {
+        assertThat("Sunday", describedAs("Sunday is not Saturday.", is(not("Saturday"))));
+    }
+
+    //IsAnything method is a matcher that always returns true.
+    //Below test will pass!
+    @Test
+    public void isAnythingMatcherTest() {
+        assertThat("Onur", is(anything("Bla Bla Bla")));
     }
 
     @DisplayName("Assertion with String")

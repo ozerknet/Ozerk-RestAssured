@@ -30,6 +30,10 @@ public class MethodSourceParameterizedTest {
         return  nameList;
     }
 
+
+//-----------------------------------------------------------------------------------------------
+
+
     public static List<Map<String,String>> getExcelData(){
         //get your file object
         ExcelUtil vytrackFile = new ExcelUtil("src/test/resources/Vytracktestdata.xlsx","QA3-all");
@@ -46,6 +50,5 @@ public class MethodSourceParameterizedTest {
         System.out.println("LastName: "+userInfo.get("lastname"));
 
     }
-
 
 }

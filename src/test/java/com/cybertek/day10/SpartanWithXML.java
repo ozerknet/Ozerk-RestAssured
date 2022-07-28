@@ -31,12 +31,34 @@ public class SpartanWithXML extends SpartanAuthTestBase {
                 .then()
                         .statusCode(200)
                         .contentType("application/xml;charset=UTF-8") //we verify we got xml through header
-                        .body("List.item[0].name",is("Meade"))
+                        .body("List.item[0].name",is("MarkoBiniBrock"))
                         .body("List.item[0].gender",is("Male"))
                         .log().all();
 
 
     }
+
+    //-----------------------------------------------------------------------------------------------
+
+    @DisplayName("GET request to /api/spartans and verify xml")
+    @Test
+    public void getSpartanXml_Ozer() {
+                given()
+                        .accept(ContentType.XML)
+                        .and()
+                        .auth().basic("admin","admin")
+                .when()
+                        .get("/api/spartans")
+                .then()
+                        .statusCode(200)
+                        .contentType("application/xml;charset=UTF-8")
+                        .body("List.item[1].name",is("Paige"))
+                        .body("List.item[1].gender",is("Female"))
+                        .log().all();
+    }
+
+    //-----------------------------------------------------------------------------------------------
+
 
     @DisplayName("GET request /api/spartans with xmlPath")
     @Test

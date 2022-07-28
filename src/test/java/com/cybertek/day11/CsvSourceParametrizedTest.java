@@ -31,6 +31,10 @@ public class CsvSourceParametrizedTest {
         assertThat(num1 + num2, equalTo(sum));
     }
 
+
+//------------------------------------------------------------------------------------------
+
+
     // Write a parameterized test for this request
     // GET https://api.zippopotam.us/us/{state}/{city}
     /*
@@ -57,21 +61,22 @@ public class CsvSourceParametrizedTest {
         System.out.println("state = " + state);
         System.out.println("city = " + city);
 
-        int placeNumber = given()
-                .baseUri("https://api.zippopotam.us")
-                .accept(ContentType.JSON)
-                .pathParam("state", state)
-                .pathParam("city", city)
-                .log().uri()
+        int placeNumber =
+                given()
+                    .baseUri("https://api.zippopotam.us")
+                    .accept(ContentType.JSON)
+                    .pathParam("state", state)
+                    .pathParam("city", city)
+                    .log().uri()
                 .when()
-                .get("/us/{state}/{city}")
-                .then()
-                .statusCode(200)
-                .and()
-                .body("places.'place name'", everyItem(containsStringIgnoringCase(city)))
+                    .get("/us/{state}/{city}")
+                    .then()
+                    .statusCode(200)
+                    .and()
+                    .body("places.'place name'", everyItem(containsStringIgnoringCase(city)))
                 //.log().body()
-                .extract()
-                .jsonPath().getList("places").size();
+                    .extract()
+                    .jsonPath().getList("places").size();
 
         System.out.println("placeNumber = " + placeNumber);
 

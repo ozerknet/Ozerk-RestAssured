@@ -36,8 +36,6 @@ public class BookitParametrized {
                     .statusCode(200)
                     .log().body();
 
-
-
         }
 
 }

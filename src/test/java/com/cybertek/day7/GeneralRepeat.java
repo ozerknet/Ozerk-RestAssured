@@ -1,5 +1,6 @@
-package com.ozerk.day2;
+package com.cybertek.day7;
 
+import com.cybertek.utilities.ConfigurationReader;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -7,37 +8,43 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import static io.restassured.RestAssured.get;
-import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
-public class HrGetRequests {
+public class GeneralRepeat {
+    String url = "http://100.24.45.97:8000/api/spartans";
+
+    @DisplayName("Send a basic GET request")
+    @Test
+    public void test1() {
+        //send a get request and save response inside the Response object
+        Response response = RestAssured.get(url);
+
+
+        //print response status code
+        System.out.println(response.statusCode());
+
+        //print response body
+        response.prettyPrint();
+    }
 
     @BeforeAll
     public static void init(){
-        RestAssured.baseURI = "http://100.24.45.97:1000/ods/hr";
+        //save baseurl inside this variable so that we dont need to type each http method.
+        baseURI = ConfigurationReader.getProperty("ordsBaseUrl");  // -> http://100.24.45.97:1000/ords/hr
     }
 
-    @DisplayName("GET request to /regions")
+    @DisplayName("Send a besic GET request with 'baseURI' ")
     @Test
-    public void test1(){
+    public void Test2(){
 
         Response response = get("/regions");
-
+        System.out.println("response.contentType() = " + response.contentType());
         //print the status code
         System.out.println(response.statusCode());
 
     }
-
-     /*
-        Given accept type is application/json
-        When user sends get request to /regions/2
-        Then response status code must be 200
-        and content type equals to application/json
-        and response body contains   Americas
-     */
-
     @DisplayName("GET request to /regions/2")
     @Test
     public void test2(){
@@ -45,15 +52,16 @@ public class HrGetRequests {
                 .when()
                 .get("/regions/2");
 
-        //verify status code
         assertEquals(200,response.statusCode());
-        //verify content type
         assertEquals("application/json",response.contentType());
-
         response.prettyPrint();
-
-        //verify body contains Americas
         assertTrue(response.body().asString().contains("Americas"));
 
     }
+
+
+
+
+
+
 }
